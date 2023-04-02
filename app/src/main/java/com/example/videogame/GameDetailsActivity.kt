@@ -7,64 +7,75 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.gameapp.UserImpressionAdapter
 import com.example.videogame.GameData.VideoGame.getDetails
 
 class GameDetailsActivity : AppCompatActivity() {
     private lateinit var game: Game
-    private lateinit var game_title: TextView
+    private lateinit var gameTitle: TextView
     private lateinit var coverImageView: ImageView
-    private lateinit var platfrom: TextView
-    private lateinit var rdate: TextView
-    private lateinit var esrb: TextView
-    private lateinit var developer: TextView
-    private lateinit var publisher: TextView
-    private lateinit var genre: TextView
-    private lateinit var description: TextView
-    private lateinit var home_button_2: Button
+    private lateinit var gamePlatfrom: TextView
+    private lateinit var gameReleaseDate: TextView
+    private lateinit var gameEsrb: TextView
+    private lateinit var gameDeveloper: TextView
+    private lateinit var gamePublisher: TextView
+    private lateinit var gameGenre: TextView
+    private lateinit var gameDescription: TextView
+    private lateinit var homebutton2: Button
+    private lateinit var impressionAdapter: UserImpressionAdapter
+    private lateinit var impressionView: RecyclerView
+    private lateinit var impressions: List<UserImpression>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_details_activity)
-        game_title = findViewById(R.id.game_title_text_view)
-        platfrom = findViewById(R.id.platform_textview)
-        rdate = findViewById(R.id.release_date_textview)
-        esrb = findViewById(R.id.esrb_rating_textview)
+        gameTitle = findViewById(R.id.game_title_text_view)
         coverImageView = findViewById(R.id.cover_imageview)
-        description = findViewById(R.id.description_textview)
-        developer = findViewById(R.id.developer_textview)
-        publisher = findViewById(R.id.publisher_textview)
-        genre = findViewById(R.id.genre_textview)
+        gamePlatfrom = findViewById(R.id.platform_textview)
+        gameReleaseDate = findViewById(R.id.release_date_textview)
+        gameEsrb = findViewById(R.id.esrb_rating_textview)
+        gameDeveloper = findViewById(R.id.developer_textview)
+        gamePublisher = findViewById(R.id.publisher_textview)
+        gameGenre = findViewById(R.id.genre_textview)
+        gameDescription = findViewById(R.id.description_textview)
         val extras = intent.extras
         if (extras != null) {
-            game = getDetails(extras.getString("title", ""))!!
+            game = getDetails(extras.getString("videoGame", ""))!!
             populateDetails()
+            impressions = game!!.userImpressions!!.sortedByDescending { it.timestamp }
 
         }
-        home_button_2 = findViewById(R.id.home_button)
-        home_button_2.setOnClickListener {
+        homebutton2 = findViewById(R.id.home_button)
+        homebutton2.setOnClickListener {
             startActivity(Intent(this, HomeActivity::class.java).apply {
-                putExtra("title", game.title)
+                putExtra("videoGame", game.title)
             })
         }
-
+        impressionView = findViewById(R.id.impression_list);
+        impressionView.setLayoutManager(LinearLayoutManager(this));
+        impressionAdapter = game.userImpressions?.let { UserImpressionAdapter(it) }!!;
+        impressionView.setAdapter(impressionAdapter);
+        impressionAdapter.updateImpressions(impressions)
     }
 
-
-
     private fun populateDetails() {
-        game_title.text = game.title
-        esrb.text = game.esrbRating
-        platfrom.text = game.platform
-        rdate.text = game.releaseDate
-        developer.text = game.developer
-        publisher.text = game.publisher
-        description.text = game.description
-        genre.text = game.genre
+        gameTitle.text = game.title
+        gamePlatfrom.text = game.platform
+        gameEsrb.text = game.esrbRating
+        gameReleaseDate.text = game.releaseDate
+        gameDeveloper.text = game.developer
+        gamePublisher.text = game.publisher
+        gameDescription.text = game.description
+        gameGenre.text = game.genre
+        val imageName = game.title.replace(" ", "_").lowercase()
         val context: Context = coverImageView.context
-        var id: Int = context.resources.getIdentifier(game.title, "drawable", context.packageName)
-        if (id == 0) id =
-            context.resources.getIdentifier("your_image", "drawable", context.packageName)
+        var id: Int = context.resources
+            .getIdentifier(imageName, "drawable", context.packageName)
+        if (id === 0) id = context.resources
+            .getIdentifier("picture1", "drawable", context.packageName)
         coverImageView.setImageResource(id)
-
     }
 }

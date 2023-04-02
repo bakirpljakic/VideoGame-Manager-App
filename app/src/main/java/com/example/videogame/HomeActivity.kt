@@ -12,9 +12,7 @@ import com.example.videogame.GameData.VideoGame.getDetails
 class HomeActivity : AppCompatActivity() {
     private lateinit var videogameView: RecyclerView
     private lateinit var videogameAdapter: GameListAdapter
-    //private lateinit var game: Game
     private lateinit var details_button: Button
-    private var on = false
     private var games = getAll()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,11 +20,15 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.home_activity)
         details_button = findViewById(R.id.details_button)
         val extras = intent.extras
-        details_button.isEnabled = extras != null
-
-        details_button.setOnClickListener{
+        if (extras != null) {
+            details_button.isEnabled = true
+        } else {
+            details_button.isEnabled = false
+        }
+        details_button.setOnClickListener {
             if (extras != null) {
-                val game = getDetails(extras.getString("title",""))
+                details_button.isEnabled = true
+                val game = getDetails(extras.getString("videoGame", ""))
                 showGameDetails(game!!)
             }
         }
@@ -40,9 +42,10 @@ class HomeActivity : AppCompatActivity() {
         videogameAdapter.updateGames(games)
         details_button = findViewById(R.id.details_button)
     }
+
     private fun showGameDetails(game: Game) {
         val intent = Intent(this, GameDetailsActivity::class.java).apply {
-            putExtra("title", game.title)
+            putExtra("videoGame", game.title)
         }
         startActivity(intent)
     }

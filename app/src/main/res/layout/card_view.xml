@@ -8,58 +8,55 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
-    app:cardPreventCornerOverlap="false"
-    >
+    app:cardPreventCornerOverlap="false">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="109dp"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:layout_height="88dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/game_rating_textview"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
             android:gravity="center"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
-            android:layout_width="201dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
 
                 android:id="@+id/game_title_textview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="17sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="174dp"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingLeft="5dp">
-
-            <TextView
-                android:id="@+id/game_release_date_textview"
-                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
-                android:textAlignment="center" />
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/game_platform_textview"
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
                 android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/game_release_date_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:textSize="12sp"
+                android:textAlignment="center" />
+
         </LinearLayout>
 
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

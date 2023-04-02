@@ -1,8 +1,6 @@
 package com.example.videogame
 
-abstract class UserImpression(
-    open val userName: String,
-    open val timestamp: Long
-){
-    constructor(): this("", 0)
+abstract class UserImpression {
+    abstract val userName: String
+    abstract val timestamp: Long
 }
