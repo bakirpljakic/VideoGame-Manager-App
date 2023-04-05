@@ -15,13 +15,13 @@ class UserImpressionAdapter(private var userImpressions: List<UserImpression>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
-        private const val RATING = 0
+        private const val RATE = 0
         private const val COMMENT = 1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        if (viewType == RATING) {
+        if (viewType == RATE) {
             val view = inflater.inflate(R.layout.rating_bar, parent, false)
             return UserRatingViewHolder(view)
         } else if (viewType == COMMENT) {
@@ -42,7 +42,7 @@ class UserImpressionAdapter(private var userImpressions: List<UserImpression>) :
     override fun getItemViewType(position: Int): Int {
         val userImpression = userImpressions[position]
         if (userImpression is UserRating) {
-            return RATING
+            return RATE
         } else if (userImpression is UserReview) {
             return COMMENT
         } else {
