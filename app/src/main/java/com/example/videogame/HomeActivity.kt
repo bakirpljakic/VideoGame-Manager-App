@@ -12,27 +12,27 @@ import com.example.videogame.GameData.VideoGame.getDetails
 class HomeActivity : AppCompatActivity() {
     private lateinit var videogameView: RecyclerView
     private lateinit var videogameAdapter: GameListAdapter
-    private lateinit var details_button: Button
+    private lateinit var detailsbutton: Button
     private var games = getAll()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
-        details_button = findViewById(R.id.details_button)
+        detailsbutton = findViewById(R.id.details_button)
         val extras = intent.extras
-        if (extras != null) {
-            details_button.isEnabled = true
+        if (extras == null) {
+            detailsbutton.isEnabled = false
         } else {
-            details_button.isEnabled = false
+            detailsbutton.isEnabled = true
         }
-        details_button.setOnClickListener {
+        detailsbutton.setOnClickListener {
             if (extras != null) {
-                details_button.isEnabled = true
                 val game = getDetails(extras.getString("videoGame", ""))
-                showGameDetails(game!!)
+                if (game != null) {
+                    showGameDetails(game)
+                }
             }
         }
-
         videogameView = findViewById(R.id.game_list)
         videogameView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         videogameAdapter = GameListAdapter(arrayListOf()) { game ->
@@ -40,8 +40,8 @@ class HomeActivity : AppCompatActivity() {
         }
         videogameView.adapter = videogameAdapter
         videogameAdapter.updateGames(games)
-        details_button = findViewById(R.id.details_button)
     }
+
 
     private fun showGameDetails(game: Game) {
         val intent = Intent(this, GameDetailsActivity::class.java).apply {

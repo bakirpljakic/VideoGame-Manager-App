@@ -30,10 +30,10 @@
 
     <Button
         android:id="@+id/details_button"
+        android:enabled="false"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginRight="5dp"
-        android:enabled="false"
         android:text="DETAILS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/home_button"
