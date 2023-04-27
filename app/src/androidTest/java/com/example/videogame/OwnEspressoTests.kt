@@ -85,20 +85,30 @@ class OwnEspressoTests {
 
     }
 
-    @Rule
-    @JvmField
-    val activityRule = ActivityTestRule(HomeActivity::class.java)
+    /**
+     * Testiranje aplikaicije u landscape orijentaciji
+     *
+     *najprije prebacujemo orijentaciju u landscape orijentaciju
+     *
+     * testira se da li se prikazuje home fragment
+     *
+     * testira se da li se prikazuje gameDetails fragment
+     */
+
     @Test
     fun TreciTest() {
 
+        homeRule.scenario.onActivity {
+            it.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        }
 
-            activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
             // provjera da li se prvi fragment prikazuje
             onView(withId(R.id.home_fragment)).check(matches(isDisplayed()))
 
             // provjera da li se drugi fragment prikazuje
             onView(withId(R.id.details_fragment)).check(matches(isDisplayed()))
+
 
     }
 
