@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navgraph"
+    app:startDestination="@id/homeFragment">
+
+    <argument
+        android:name="videoGame"
+        app:argType="string"/>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.videogame.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/homeToGame"
+            app:destination="@id/gameDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDetailsFragment"
+        android:name="com.example.videogame.GameDetailsFragment"
+        android:label="GameDetailsFragment" >
+        <action
+            android:id="@+id/gameToHome"
+            app:destination="@id/homeFragment" />
+    </fragment>
+</navigation>

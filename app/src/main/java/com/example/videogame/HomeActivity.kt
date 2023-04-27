@@ -1,53 +1,31 @@
 package com.example.videogame
 
-import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.videogame.GameData.VideoGame.getAll
-import com.example.videogame.GameData.VideoGame.getDetails
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
-    private lateinit var videogameView: RecyclerView
-    private lateinit var videogameAdapter: GameListAdapter
-    private lateinit var detailsbutton: Button
-    private var games = getAll()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
-        detailsbutton = findViewById(R.id.details_button)
-        val extras = intent.extras
-        if (extras == null) {
-            detailsbutton.isEnabled = false
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            val navView: BottomNavigationView = findViewById(R.id.bottomNavigation)
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            val navController = navHostFragment.navController
+            navView.setupWithNavController(navController)
         } else {
-            detailsbutton.isEnabled = true
-        }
-        detailsbutton.setOnClickListener {
-            if (extras != null) {
-                val game = getDetails(extras.getString("videoGame", ""))
-                if (game != null) {
-                    showGameDetails(game)
-                }
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.details_fragment, GameDetailsFragment())
+                replace(R.id.home_fragment, HomeFragment())
+                commit()
             }
         }
-        videogameView = findViewById(R.id.game_list)
-        videogameView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        videogameAdapter = GameListAdapter(arrayListOf()) { game ->
-            showGameDetails(game)
-        }
-        videogameView.adapter = videogameAdapter
-        videogameAdapter.updateGames(games)
     }
-
-
-    private fun showGameDetails(game: Game) {
-        val intent = Intent(this, GameDetailsActivity::class.java).apply {
-            putExtra("videoGame", game.title)
-        }
-        startActivity(intent)
-    }
-
 }
+

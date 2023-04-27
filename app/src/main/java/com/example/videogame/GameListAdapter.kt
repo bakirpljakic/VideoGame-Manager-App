@@ -31,7 +31,7 @@ class GameListAdapter(
     }
     inner class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val gameRating: TextView = itemView.findViewById(R.id.game_rating_textview)
-        val gameTitle: TextView = itemView.findViewById(R.id.game_title_textview)
+        val gameTitle: TextView = itemView.findViewById(R.id.item_title_textview)
         val gameReleaseDate: TextView = itemView.findViewById(R.id.game_release_date_textview)
         val gamePlatform: TextView = itemView.findViewById(R.id.game_platform_textview)
     }
