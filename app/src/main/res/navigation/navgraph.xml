@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.videogame.HomeFragment"
+        android:name="ba.etf.rma23.projekat.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/homeToGame"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameDetailsFragment"
-        android:name="com.example.videogame.GameDetailsFragment"
+        android:name="ba.etf.rma23.projekat.GameDetailsFragment"
         android:label="GameDetailsFragment" >
         <action
             android:id="@+id/gameToHome"

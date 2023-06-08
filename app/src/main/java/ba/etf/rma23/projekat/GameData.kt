@@ -1,13 +1,11 @@
-package com.example.videogame
-
-import java.sql.Timestamp
-import java.time.LocalDateTime
+package ba.etf.rma23.projekat
 
 class GameData {
     companion object VideoGame {
         fun getAll(): List<Game> {
             return listOf(
                 Game(
+                    1,
                     "Need for Speed Underground 2",
                     "PlayStation/Xbox/PC",
                     "09.11.2004",
@@ -15,7 +13,8 @@ class GameData {
                     "",
                     "E",
                     "EA Black Box",
-                    "Electronic Arts (EA)", "Racing" ,
+                    "Electronic Arts (EA)",
+                    "Racing" ,
                     "Need for Speed Underground 2 is a popular racing video game that was released in 2004. " +
                             "In Need for Speed Underground 2, players take on the role of a street racer who must climb the ranks of the underground racing scene in a fictional city called Bayview. ",
                     mutableListOf(
@@ -23,9 +22,10 @@ class GameData {
                         UserRating("khalilovic", 1625781600000, 3.5),
                         UserReview("ebronja", 1664229600000, "Fantastic racing game that I would highly recommend to anyone looking for some high-speed action."),
                         UserReview("eagovic", 1664575200000, "I was really disappointed with this racing game."),
-                        UserRating("smalkic", 1661378400000, 5.0))
+                        UserRating("smalkic", 1661378400000, 5.0)
+                    )
                 ),
-                Game(
+                Game(2,
                     "Zula",
                     "PC",
                     "19.09.2016",
@@ -43,9 +43,10 @@ class GameData {
                         UserReview("adedic", 1625851600000, "I've been playing Zula for a while now and I have to say, it's one of the best free-to-play FPS games out there."),
                         UserRating("esalkic", 1657387600000, 3.5),
                         UserReview("abasic", 1664575200000, "I had high hopes for Zula, but unfortunately, it fell short of my expectations."),
-                        UserRating("shukic", 1657906000000, 5.0))
+                        UserRating("shukic", 1657906000000, 5.0)
+                    )
                 ),
-                Game(
+                Game(3,
                     "World of Tanks",
                     "PlayStation/Xbox/PC",
                     "12.08.2010.",
@@ -59,7 +60,7 @@ class GameData {
                             "Players can choose from a variety of tanks and participate in battles against other players, completing objectives and earning rewards.",
                     mutableListOf()
                 ),
-                Game(
+                Game(4,
                     "PES 2022",
                     "PlayStation/Xbox/PC",
                     "30.09.2022",
@@ -74,7 +75,7 @@ class GameData {
                             " It also has a new mode called Match Pass, which allows players to earn rewards by completing objectives during matches.",
                     mutableListOf()
                 ),
-                Game(
+                Game(5,
                     "Grand Theft Auto V",
                     "PlayStation/Xbox/PC",
                     "17.09.2013",
@@ -90,7 +91,7 @@ class GameData {
                     mutableListOf()
                 ),
 
-                Game(
+                Game(6,
                     "Gran Turismo Sport",
                     "PlayStation",
                     "17.10.2017",
@@ -104,7 +105,7 @@ class GameData {
                             " The game was designed to be an online-focused experience, with an emphasis on competitive racing and esports.",
                     mutableListOf()
                 ),
-                Game(
+                Game(7,
                     "The Forest",
                     "PlayStation/PC",
                     "30.05.2014",
@@ -120,7 +121,7 @@ class GameData {
                     mutableListOf()
                 ),
 
-                Game(
+                Game(8,
                     "Minecraft",
                     "PlayStation/Xbox/PC",
                     "17.05.2009",
@@ -133,7 +134,7 @@ class GameData {
                     "Minecraft is a sandbox video game developed by Mojang Studios. In the game, players explore a blocky, procedurally-generated 3D world, mining resources and using them to craft tools, buildings, and other objects. ",
                     mutableListOf()
                 ),
-                Game(
+                Game(9,
                     "Euro Truck Simulator 2",
                     "PC",
                     "19.10.2012",
@@ -148,7 +149,7 @@ class GameData {
                             "The game features realistic physics, detailed graphics, and a variety of trucks to choose from.",
                     mutableListOf()
                 ),
-                Game(
+                Game(10,
                     "Red Dead Redemption 2",
                     "PlayStation/Xbox/PC",
                     "26.10.2018",

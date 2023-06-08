@@ -1,22 +1,19 @@
-package com.example.videogame
+package ba.etf.rma23.projekat
 
 import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gameapp.UserImpressionAdapter
-import com.example.videogame.GameData.VideoGame.getAll
+import ba.etf.rma23.projekat.GameData.VideoGame.getAll
+import ba.etf.unsa.rma23.projekat.R
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -60,7 +57,7 @@ class GameDetailsFragment : Fragment() {
         } else {
             game = GameData.getDetails(bundle.getString("videoGame", ""))!!
             populateDetails()
-            impressions = game!!.userImpressions!!.sortedByDescending { it.timestamp }
+           // impressions = game!!.userImpressions!!.sortedByDescending { it.timestamp }
         }
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             val navigation: BottomNavigationView =
@@ -88,16 +85,16 @@ class GameDetailsFragment : Fragment() {
 
     private fun populateDetails() {
         gameTitle.text = game.title
-        gamePlatfrom.text = game.platform
+        gamePlatfrom.text = game.platform.toString()
         gameEsrb.text = game.esrbRating
         gameReleaseDate.text = game.releaseDate
         gameDeveloper.text = game.developer
         gamePublisher.text = game.publisher
         gameDescription.text = game.description
         gameGenre.text = game.genre
-        val imageName = game.title.replace(" ", "_").lowercase()
+        val imageName = game.title!!.replace(" ", "_").lowercase()
         val context: Context = coverImageView.context
-        var id: Int = context.resources
+       var id: Int = context.resources
             .getIdentifier(imageName, "drawable", context.packageName)
         if (id === 0) id = context.resources
             .getIdentifier("picture1", "drawable", context.packageName)

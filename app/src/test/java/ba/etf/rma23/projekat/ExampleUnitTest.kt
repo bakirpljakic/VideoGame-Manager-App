@@ -1,4 +1,4 @@
-package com.example.videogame
+package ba.etf.rma23.projekat
 
 import org.junit.Test
 

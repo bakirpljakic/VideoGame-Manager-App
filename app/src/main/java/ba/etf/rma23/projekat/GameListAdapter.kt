@@ -1,15 +1,16 @@
-package com.example.videogame
+package ba.etf.rma23.projekat
 
-import android.content.Context
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import ba.etf.unsa.rma23.projekat.R
+
 
 class GameListAdapter(
     private var games: List<Game>,
-    private val onItemClicked: (game:Game) -> Unit
+    private val onItemClicked: (game: Game) -> Unit
 ) : RecyclerView.Adapter<GameListAdapter.GameViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         val view = LayoutInflater
@@ -22,7 +23,7 @@ class GameListAdapter(
         holder.gameTitle.text = games[position].title;
         holder.gameRating.text = games[position].rating.toString()
         holder.gameReleaseDate.text = games[position].releaseDate
-        holder.gamePlatform.text = games[position].platform
+        holder.gamePlatform.text = games[position].platform.toString()
         holder.itemView.setOnClickListener{ onItemClicked(games[position]) }
     }
     fun updateGames(games: List<Game>) {

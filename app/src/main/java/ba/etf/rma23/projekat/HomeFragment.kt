@@ -1,18 +1,17 @@
-package com.example.videogame
+package ba.etf.rma23.projekat
 
-import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.videogame.GameData.VideoGame.getAll
-import com.example.videogame.GameData.VideoGame.getDetails
+import ba.etf.rma23.projekat.GameData.VideoGame.getAll
+import ba.etf.rma23.projekat.GameData.VideoGame.getDetails
+import ba.etf.unsa.rma23.projekat.R
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

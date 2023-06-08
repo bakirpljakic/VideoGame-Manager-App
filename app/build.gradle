@@ -2,23 +2,32 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
+
 }
 
+def localPropertiesFile = rootProject.file("local.properties")
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(localPropertiesFile))
+
 android {
-    namespace 'com.example.videogame'
+    namespace 'ba.etf.unsa.rma23.projekat'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.videogame"
+        applicationId "ba.etf.unsa.rma.videogameproject"
         minSdk 29
         targetSdk 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+            buildConfigField ("String", "CLIENT_ID", CLIENT_ID)
+            buildConfigField ("String", "AUTHORIZATION", AUTHORIZATION)
+
     }
 
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -34,7 +43,6 @@ android {
 }
 
 dependencies {
-
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
@@ -60,25 +68,14 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:+"
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
-    // Feature module Support
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.5.3")
 
-// Testing Navigation
-    androidTestImplementation("androidx.navigation:navigation-testing:2.5.3")
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test:core-ktx:1.5.0'
-    androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.5'
-    testImplementation("org.hamcrest:hamcrest:x.y.z")
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.test.espresso:espresso-contrib:3.5.1'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
