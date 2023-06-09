@@ -18,7 +18,7 @@ interface IGDBApiService {
     @GET("games")
     suspend fun getGamesByName(
         @Query("search") name: String,
-        @Query("fields") fields: String = "id, name, platforms.name, first_release_date, age_ratings.rating, age_ratings.category, cover.url, involved_companies, involved_companies.developer, involved_companies.publisher, involved_companies.company.name, genres, genres.name, summary"
+        @Query("fields") fields: String = "id, name, platforms.name, first_release_date, rating, age_ratings.rating, age_ratings.category, cover.url, involved_companies, involved_companies.developer, involved_companies.publisher, involved_companies.company.name, genres, genres.name, summary"
     ): Response<List<Game>>
 
 
@@ -49,14 +49,3 @@ interface IGDBApiService {
     ): Response<List<Game>>
 
 }
-/*
-   @POST("games")
-   suspend fun getGameByID(
-    /*   @Query("id") id: Int,
-       @Query("fields") fields: String = "id, name, platforms.name, first_release_date, age_ratings.rating, age_ratings.category, cover.url, involved_companies, involved_companies.developer, involved_companies.publisher, involved_companies.company.name,genres, genres.name, summary"
-   */
-   @Body body: okhttp3.RequestBody
-   ): Response<List<Game>>
-
-
-*/

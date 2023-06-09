@@ -9,7 +9,6 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import ba.etf.rma23.projekat.HomeActivity
 import com.example.videogame.R
 import org.hamcrest.Matcher
 import org.hamcrest.core.IsNot.not
@@ -21,7 +20,7 @@ import org.junit.runner.RunWith
 class OwnEspressoTests {
 
     @get:Rule
-    var homeRule: ActivityScenarioRule<HomeActivity> = ActivityScenarioRule(HomeActivity::class.java)
+    var homeRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
 
     /**
      * Testiranje rasporeda u GameDetails fragmentu

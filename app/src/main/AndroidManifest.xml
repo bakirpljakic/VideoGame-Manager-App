@@ -12,10 +12,8 @@
         android:theme="@style/Theme.VideoGame"
         tools:targetApi="31" >
         <activity
-            android:name=".GameDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name="ba.etf.rma23.projekat.HomeActivity"
+            android:name="ba.etf.rma23.projekat.MainActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

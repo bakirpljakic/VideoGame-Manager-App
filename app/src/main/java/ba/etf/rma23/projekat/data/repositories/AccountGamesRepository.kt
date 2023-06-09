@@ -3,7 +3,8 @@ package ba.etf.rma23.projekat.data.repositories
 import ba.etf.rma23.projekat.Game
 import ba.etf.rma23.projekat.GameInfo
 import ba.etf.rma23.projekat.data.repositories.AccountApiConfig.retrofit
-import ba.etf.rma23.projekat.RequestBody
+import ba.etf.rma23.projekat.AccountResponse
+import ba.etf.rma23.projekat.ESRB
 import kotlinx.coroutines.*
 
 
@@ -29,29 +30,15 @@ object AccountGamesRepository {
         return false
     }
 
-    /* suspend fun getSavedGames(): List<Game> = withContext(Dispatchers.IO) {
-         try {
-             val response = retrofit.getSavedGames()
-             if (response.isSuccessful) {
-                 return@withContext response.body() ?: emptyList()
-             } else {
-                 return@withContext emptyList()
-             }
-         } catch (e: Exception) {
-             e.printStackTrace()
-             return@withContext emptyList()
-         }
-     }
- */
 
     suspend fun getSavedGames(): List<Game> {
         return withContext(Dispatchers.IO) {
             var response = AccountApiConfig.retrofit.getSavedGames(uHash!!)
-            val lista: MutableList<Game> = mutableListOf()
+            val savedGames: MutableList<Game> = mutableListOf()
             for (i in 0 until response.size) {
-                lista.add(GamesRepository.getGamesByName(response[i].name)[0])
+                savedGames.add(GamesRepository.getGamesByName(response[i].gameTitle)[0])
             }
-            return@withContext lista
+            return@withContext savedGames
         }
     }
 
@@ -67,9 +54,9 @@ object AccountGamesRepository {
     suspend fun saveGame(game: Game): Game {
         return try {
             var updatedGame = game
-            val requestBody = RequestBody(game.id, game.title)
+            val accountResponse = AccountResponse(game.id, game.title)
             val response = withContext(Dispatchers.IO) {
-                retrofit.saveGame(GameInfo(requestBody))
+                retrofit.saveGame(GameInfo(accountResponse))
             }
 
             val gameResponse = withContext(Dispatchers.IO) {
@@ -98,6 +85,49 @@ object AccountGamesRepository {
             emptyList()
         }
     }
+
+    suspend fun removeNonSafe(): Boolean {
+        val age = uAge
+        val favoriteList = getSavedGames()
+        val validAgeList = mutableListOf<Game>()
+
+        for (game in favoriteList) {
+            if (game.esrbRating != "No ESRB rating") {
+                val esrbValue = game.esrbRating?.let { getEsrbRatingByString(it) }
+                val ratingString = esrbValue?.name ?: continue
+                val value = realAge(ratingString)
+                if (value != -1 && value > age) {
+                    removeGame(game.id)
+                } else {
+                    validAgeList.add(game)
+                }
+            } else {
+                validAgeList.add(game)
+            }
+        }
+        return true
+    }
+
+    fun getEsrbRatingByString(esrb: String): ESRB? {
+        return ESRB.values().find { it.name == esrb }
+    }
+
+    fun realAge(value: String): Int {
+        return when (value) {
+            "Three" -> 3
+            "Seven" -> 7
+            "Twelve" -> 12
+            "Sixteen" -> 16
+            "Eighteen", "RP", "AO" -> 18
+            "EC" -> 3
+            "E" -> 0
+            "E10" -> 10
+            "T" -> 13
+            "M" -> 17
+            else -> -1
+        }
+    }
+
 
 
 }

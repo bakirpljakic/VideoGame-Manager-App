@@ -1,5 +1,8 @@
 package ba.etf.rma23.projekat
 
+import ba.etf.rma23.projekat.data.repositories.GamesRepository
+import kotlinx.coroutines.runBlocking
+
 class GameData {
     companion object VideoGame {
         fun getAll(): List<Game> {
@@ -166,12 +169,13 @@ class GameData {
             )
         }
 
-        fun getDetails(game_title: String): Game? {
-            var games = getAll()
-            for (i in 0..9) {
-                if (games[i].title == game_title) return games[i]
+        fun getDetails(name: String): Game? {
+            var game: Game?
+            runBlocking {
+                game = GamesRepository.getOneGame(name)
             }
-            return null
+            return game
         }
+
     }
 }

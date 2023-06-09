@@ -7,15 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ba.etf.rma23.projekat.GameData.VideoGame.getAll
+import ba.etf.rma23.projekat.data.repositories.AccountGamesRepository
 import ba.etf.unsa.rma23.projekat.R
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.runBlocking
 
 class GameDetailsFragment : Fragment() {
     private lateinit var game: Game
@@ -31,6 +35,8 @@ class GameDetailsFragment : Fragment() {
     private lateinit var impressionAdapter: UserImpressionAdapter
     private lateinit var impressionView: RecyclerView
     private var impressions: List<UserImpression>? = null
+    private lateinit var saveButton: Button
+    private lateinit var removeButton: Button
 
 
     override fun onCreateView(
@@ -49,13 +55,15 @@ class GameDetailsFragment : Fragment() {
         gamePublisher = view.findViewById(R.id.publisher_textview)
         gameGenre = view.findViewById(R.id.genre_textview)
         gameDescription = view.findViewById(R.id.description_textview)
+        saveButton = view.findViewById(R.id.save_game_button)
+        removeButton = view.findViewById(R.id.remove_game_button)
 
         val bundle: Bundle? = arguments
         if (bundle == null) {
             game = getAll()[0]
             populateDetails()
         } else {
-            game = GameData.getDetails(bundle.getString("videoGame", ""))!!
+            game = bundle.getString("videoGame")?.let { GameData.getDetails(it) }!!
             populateDetails()
            // impressions = game!!.userImpressions!!.sortedByDescending { it.timestamp }
         }
@@ -75,6 +83,12 @@ class GameDetailsFragment : Fragment() {
             }
             navigation.menu.findItem(R.id.gameDetailsItem).isChecked = true
         }
+        saveButton.setOnClickListener{
+            runBlocking { AccountGamesRepository.saveGame(game) }
+        }
+        removeButton.setOnClickListener {
+            runBlocking { AccountGamesRepository.removeGame(game.id) }
+        }
         impressionView = view.findViewById(R.id.impression_list);
         impressionView.layoutManager = LinearLayoutManager(requireContext())
         impressionAdapter = game.userImpressions?.let { UserImpressionAdapter(it) }!!
@@ -85,20 +99,20 @@ class GameDetailsFragment : Fragment() {
 
     private fun populateDetails() {
         gameTitle.text = game.title
-        gamePlatfrom.text = game.platform.toString()
+        gamePlatfrom.text = game.platform
         gameEsrb.text = game.esrbRating
         gameReleaseDate.text = game.releaseDate
         gameDeveloper.text = game.developer
         gamePublisher.text = game.publisher
         gameDescription.text = game.description
         gameGenre.text = game.genre
-        val imageName = game.title!!.replace(" ", "_").lowercase()
         val context: Context = coverImageView.context
        var id: Int = context.resources
-            .getIdentifier(imageName, "drawable", context.packageName)
-        if (id === 0) id = context.resources
             .getIdentifier("picture1", "drawable", context.packageName)
-        coverImageView.setImageResource(id)
+        Glide.with(coverImageView.context).
+        load("https://"+game.coverImage).error(id).fallback(id).into(coverImageView)
+
+
     }
 
 }

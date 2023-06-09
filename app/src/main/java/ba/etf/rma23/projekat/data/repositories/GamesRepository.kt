@@ -59,6 +59,10 @@ object GamesRepository {
             emptyList()
         }
     }
+
+    suspend fun getOneGame(game: String):Game{
+        return getGamesByName(game).get(0)
+    }
     //var allGamesList: List<Game> = emptyList()
 
    /* suspend fun allGames(): List<Game> = withContext(Dispatchers.IO) {

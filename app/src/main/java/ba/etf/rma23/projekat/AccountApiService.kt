@@ -12,7 +12,7 @@ interface AccountApiService {
     @GET("account/{aid}/games")
     suspend fun getSavedGames(
         @Path("aid") aid: String = getHash()
-    ): List<GameResponse>
+    ): List<AccountResponse>
 
     @Headers(CONTENT_TYPE_JSON)
     @DELETE("account/{aid}/game/{gid}")
@@ -26,7 +26,7 @@ interface AccountApiService {
     suspend fun saveGame(
         @Body requestBody: GameInfo,
         @Path("aid") aid: String = getHash()
-    ): RequestBody
+    ): AccountResponse
 
 }
 

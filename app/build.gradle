@@ -19,14 +19,17 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
+/*
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
             buildConfigField ("String", "CLIENT_ID", CLIENT_ID)
-            buildConfigField ("String", "AUTHORIZATION", AUTHORIZATION)
-
+            buildConfigField ("String", "AUTHORIZATION", AUTHORIZATION)*/
     }
 
     buildTypes {
+        debug{
+            buildConfigField 'String', "CLIENT_ID", CLIENT_ID
+            buildConfigField 'String', "AUTHORIZATION", AUTHORIZATION
+        }
 
         release {
             minifyEnabled false
