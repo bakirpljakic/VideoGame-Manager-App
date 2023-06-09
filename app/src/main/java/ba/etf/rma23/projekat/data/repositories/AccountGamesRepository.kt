@@ -11,13 +11,14 @@ import kotlinx.coroutines.*
 object AccountGamesRepository {
 
     var uHash: String = "7a8110d0-d3f9-41b7-bd01-67910f80afd3"
-    var uAge = 0
+    var uAge: Int = 0
 
     fun getHash(): String {
         return this.uHash
     }
 
     fun setHash(acHash: String): Boolean {
+        if (uHash == null) return false
         uHash = acHash
         return true
     }
@@ -87,32 +88,31 @@ object AccountGamesRepository {
     }
 
     suspend fun removeNonSafe(): Boolean {
-        val age = uAge
-        val favoriteList = getSavedGames()
-        val validAgeList = mutableListOf<Game>()
-
-        for (game in favoriteList) {
-            if (game.esrbRating != "No ESRB rating") {
-                val esrbValue = game.esrbRating?.let { getEsrbRatingByString(it) }
-                val ratingString = esrbValue?.name ?: continue
-                val value = realAge(ratingString)
-                if (value != -1 && value > age) {
+        val userAge = uAge
+        val favoriteGames = getSavedGames()
+        val validAgeGames = mutableListOf<Game>()
+        for (game in favoriteGames) {
+            if (game.esrbRating != "Not available") {
+                val esrbRating = game.esrbRating?.let { getESRB(it) }
+                val ratingName = esrbRating?.name ?: continue
+                val gameAge = ageConvertor(ratingName)
+                if (gameAge != -1 && gameAge > userAge) {
                     removeGame(game.id)
                 } else {
-                    validAgeList.add(game)
+                    validAgeGames.add(game)
                 }
             } else {
-                validAgeList.add(game)
+                validAgeGames.add(game)
             }
         }
         return true
     }
 
-    fun getEsrbRatingByString(esrb: String): ESRB? {
+    fun getESRB(esrb: String): ESRB? {
         return ESRB.values().find { it.name == esrb }
     }
 
-    fun realAge(value: String): Int {
+    fun ageConvertor(value: String): Int {
         return when (value) {
             "Three" -> 3
             "Seven" -> 7
@@ -127,7 +127,4 @@ object AccountGamesRepository {
             else -> -1
         }
     }
-
-
-
 }

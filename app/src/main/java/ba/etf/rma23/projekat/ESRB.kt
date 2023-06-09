@@ -42,5 +42,4 @@ enum class ESRB(val value: Int) {
     ACB_R18(38),
     ACB_RC(39);
 
-
 }

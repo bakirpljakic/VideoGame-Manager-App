@@ -17,17 +17,15 @@ class AccountDeseralization : JsonDeserializer<Game> {
         val jsonObject = json?.asJsonObject ?: JsonObject()
         val id = jsonObject.get("igdb_id")?.asInt ?: 0
 
-        var game = Game(id,"","","",0.0,"","","",
-            "", "", "", emptyList())
+        var game = Game(id, "", "", "", 0.0, "", "", "", "", "", "", emptyList())
 
-        runBlocking {
-            val gameResponse = CoroutineScope(Dispatchers.IO).async {
-                GamesRepository.getGameByID(id)
-            }
-            val response = gameResponse.await()
+        GlobalScope.launch(Dispatchers.IO) {
+            val response = GamesRepository.getGameByID(id)
 
             if (response.isNotEmpty()) {
-                game = response[0]
+                withContext(Dispatchers.Main) {
+                    game = response[0]
+                }
             }
         }
 

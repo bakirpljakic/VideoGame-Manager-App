@@ -8,14 +8,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object IGDBApiConfig {
     var baseURL: String = "https://api.igdb.com/v4/"
-
-    val gson = GsonBuilder().registerTypeAdapter(Game::class.java, GameDeseralization()).create()
-
+    val gsonbuild = GsonBuilder().registerTypeAdapter(Game::class.java, GameDeseralization()).create()
     val retrofit : IGDBApiService = Retrofit.Builder().
     baseUrl(baseURL).
-    addConverterFactory(GsonConverterFactory.create(gson)).
+    addConverterFactory(GsonConverterFactory.create(gsonbuild)).
     build().create(IGDBApiService::class.java)
-
-   // fun postaviBaseUrl(url : String):Unit { baseURL = url}
 }
 

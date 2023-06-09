@@ -18,16 +18,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
 
-     /*   CoroutineScope(Job() + Dispatchers.Main).launch {
-            AccountGamesRepository.setHash("ca0ee672-440b-45b2-8a12-75b80f4fbdd3")
-            AccountGamesRepository.saveGame(Game(24273,"Age of Empires: The Age of Kings","","",10.0,"","","","","","",listOf<UserImpression>()))
-            AccountGamesRepository.saveGame(Game(47076,"Age of Empires: Gold Edition","","",10.0,"","","","","","",listOf<UserImpression>()))
-            var res = AccountGamesRepository.getSavedGames()
-            print(res.size)
-            print(res)
-        }*/
-        //print(res[0].releaseDate)
-
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             val navView: BottomNavigationView = findViewById(R.id.bottomNavigation)
             val navHostFragment =

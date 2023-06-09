@@ -28,11 +28,9 @@ class GameDeseralization : JsonDeserializer<Game> {
         val local = LocalDate.ofEpochDay(ets / 86400)
         val f = DateTimeFormatter.ofPattern("dd-MM-yyyy")
         val releaseDate = local.format(f)
-
         val rating = jsonObject.get("rating")?.asDouble ?: 0.0
         val ratingFormatted = DecimalFormat("#.##").format(rating)
         val ratingRounded = ratingFormatted.toDoubleOrNull() ?: 0.0
-
         val coverImage = getCoverImage(jsonObject)
         val esrbRating = getEsrbRating(jsonObject)
         val developer = getCompany(jsonObject, "developer")

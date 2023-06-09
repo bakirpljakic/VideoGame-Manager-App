@@ -5,9 +5,9 @@ plugins {
 
 }
 
-def localPropertiesFile = rootProject.file("local.properties")
+/*def localPropertiesFile = rootProject.file("local.properties")
 def localProperties = new Properties()
-localProperties.load(new FileInputStream(localPropertiesFile))
+localProperties.load(new FileInputStream(localPropertiesFile))*/
 
 android {
     namespace 'ba.etf.unsa.rma23.projekat'
