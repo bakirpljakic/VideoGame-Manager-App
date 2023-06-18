@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
 
 }
 
@@ -80,5 +81,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
+    implementation("androidx.room:room-runtime:+")
+    annotationProcessor "androidx.room:room-compiler:+"
+    implementation("androidx.room:room-ktx:+")
+    kapt("androidx.room:room-compiler:+")
 
 }

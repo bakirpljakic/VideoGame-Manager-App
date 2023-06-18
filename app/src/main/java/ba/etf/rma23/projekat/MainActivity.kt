@@ -4,11 +4,16 @@ package ba.etf.rma23.projekat
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import ba.etf.rma23.projekat.data.repositories.GameReviewsRepository
+import ba.etf.rma23.projekat.data.repositories.GameReviewsRepository.getOfflineReviews
 import ba.etf.rma23.projekat.data.repositories.GamesRepository
 import ba.etf.unsa.rma23.projekat.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +36,82 @@ class MainActivity : AppCompatActivity() {
                 commit()
             }
         }
+
+       /* val context = applicationContext
+        val review = GameReview(
+            id = 2, // Replace with the appropriate review ID
+            rating = 5,
+            review = "This is my favorite game",
+            igdb_id = 950,
+            online = true
+        )
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            val response = GameReviewsRepository.sendReview(review)
+
+        }
+*/
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            val context = applicationContext // Zamijenite applicationContext s odgovarajućim kontekstom aplikacije
+
+            val offlineReviews = getOfflineReviews(context)
+            for (review in offlineReviews) {
+                println(review.toString()) // Ispisivanje offline recenzija na konzolu, prilagodite prema svojim potrebama
+            }
+        }
+
+
+
+        /*
+        val context = applicationContext // Replace applicationContext with the appropriate application context
+
+        val review = GameReview(
+            id = 1, // Replace with the appropriate review ID
+            rating = 5,
+            review = "This is my favorite game",
+            igdb_id = 12345,
+            online = true
+        )
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val db = AppDatabase.getInstance(context)
+            db.reviewDao().insertAll(review)
+        }*/
+
+
+
+/*
+            val context = this// Zamijenite applicationContext s odgovarajućim kontekstom aplikacije
+
+            val review = GameReview(
+                id = 1, // Zamijenite s odgovarajućim ID-om recenzije
+                rating = 5,
+                review = "Ovo je moja omiljena igra",
+                igdb_id = 12345,
+                online = true
+            )
+
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                GameReviewsRepository.writeFavorite(this@MainActivity, review)
+                val result = GameReviewsRepository.getOfflineReviews()
+                val name = result.get(0)
+                print(name)
+
+
+            }*/
+
+        }}
+        /*CoroutineScope(Job() + Dispatchers.Main).launch {
+            val response = GameReviewsRepository.getOfflineReviews()
+            print
+        }*/
+
+
+
+
+
+
+
+
       /*  CoroutineScope(Job() + Dispatchers.Main).launch {
             val response = AccountGamesRepository.getSavedGames()
             val a = response.size
@@ -75,7 +156,7 @@ class MainActivity : AppCompatActivity() {
                 val game2 = Game(5, "Adi", "", "", 0.0, "", "", "", "", "", "", emptyList())
                 AccountGamesRepository.saveGame(game2)
             }*/
-    }}
+
                 /*if (game != null) {
                     val id = game.get(0).id
                     print(id)
