@@ -21,11 +21,11 @@ class GameData {
                     "Need for Speed Underground 2 is a popular racing video game that was released in 2004. " +
                             "In Need for Speed Underground 2, players take on the role of a street racer who must climb the ranks of the underground racing scene in a fictional city called Bayview. ",
                     mutableListOf(
-                        UserRating("bpljakic", 1652306400000, 3.0),
-                        UserRating("khalilovic", 1625781600000, 3.5),
+                        UserRating("bpljakic", 1652306400000, 3),
+                        UserRating("khalilovic", 1625781600000, 3),
                         UserReview("ebronja", 1664229600000, "Fantastic racing game that I would highly recommend to anyone looking for some high-speed action."),
                         UserReview("eagovic", 1664575200000, "I was really disappointed with this racing game."),
-                        UserRating("smalkic", 1661378400000, 5.0)
+                        UserRating("smalkic", 1661378400000, 5)
                     )
                 ),
                 Game(2,
@@ -42,11 +42,11 @@ class GameData {
                             "It features a range of gameplay modes, including team deathmatch, capture the flag, and free for all. " +
                             "The game also has a variety of playable characters with unique abilities and customizable weapons.",
                     mutableListOf(
-                        UserRating("john", 1652306400000, 4.0),
+                        UserRating("john", 1652306400000, 4),
                         UserReview("adedic", 1625851600000, "I've been playing Zula for a while now and I have to say, it's one of the best free-to-play FPS games out there."),
-                        UserRating("esalkic", 1657387600000, 3.5),
+                        UserRating("esalkic", 1657387600000, 3),
                         UserReview("abasic", 1664575200000, "I had high hopes for Zula, but unfortunately, it fell short of my expectations."),
-                        UserRating("shukic", 1657906000000, 5.0)
+                        UserRating("shukic", 1657906000000, 5)
                     )
                 ),
                 Game(3,

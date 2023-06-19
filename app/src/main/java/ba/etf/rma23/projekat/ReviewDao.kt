@@ -12,4 +12,7 @@ interface ReviewDao {
     @Insert
     suspend fun insertAll(vararg review: GameReview)
 
+    @Query("UPDATE gamereview SET online = true WHERE id = :id")
+    suspend fun updateOnline(id: Int)
+
 }

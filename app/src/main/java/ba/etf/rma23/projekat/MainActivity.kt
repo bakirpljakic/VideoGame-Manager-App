@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 */
-        CoroutineScope(Job() + Dispatchers.Main).launch {
+        /*CoroutineScope(Job() + Dispatchers.Main).launch {
             val context = applicationContext // Zamijenite applicationContext s odgovarajućim kontekstom aplikacije
 
             val offlineReviews = getOfflineReviews(context)
@@ -59,25 +59,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+*/
 
 
-        /*
         val context = applicationContext // Replace applicationContext with the appropriate application context
-
+/*
         val review = GameReview(
-            id = 1, // Replace with the appropriate review ID
+            id = 50975, // Replace with the appropriate review ID
             rating = 5,
             review = "This is my favorite game",
-            igdb_id = 12345,
+            igdb_id = 50975,
             online = true
         )
 
         GlobalScope.launch(Dispatchers.IO) {
-            val db = AppDatabase.getInstance(context)
-            db.reviewDao().insertAll(review)
-        }*/
+            GameReviewsRepository.sendReview(review)
+        }
 
-
+*/
 
 /*
             val context = this// Zamijenite applicationContext s odgovarajućim kontekstom aplikacije
