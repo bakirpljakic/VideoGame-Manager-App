@@ -4,13 +4,11 @@ import ba.etf.unsa.rma23.projekat.BuildConfig
 import retrofit2.Response
 import retrofit2.http.*
 
-private const val clientID: String = BuildConfig.CLIENT_ID
-private const val authorization: String = BuildConfig.AUTHORIZATION
+
 
 interface IGDBApiService {
 
     @Headers(
-
         "Client-ID: ugurgksxs15snq8zzkv2d1wtaheqy7",
         "Authorization: Bearer xvddnb6eugf27gr41wh72qbbnbiy7b",
         "Content-Type: application/json"
@@ -23,8 +21,6 @@ interface IGDBApiService {
 
 
     @Headers(
-        "Client-ID: $clientID",
-        "Authorization: $authorization",
         "Content-Type: application/json"
     )
     @POST("games")
@@ -33,8 +29,6 @@ interface IGDBApiService {
     ): Response<List<Game>>
 
     @Headers(
-        "Client-ID: $clientID",
-        "Authorization: $authorization",
         "Content-Type: application/json"
     )
     @POST("games")

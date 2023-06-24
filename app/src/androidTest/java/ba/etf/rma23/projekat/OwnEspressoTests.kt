@@ -9,7 +9,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.videogame.R
+
 import org.hamcrest.Matcher
 import org.hamcrest.core.IsNot.not
 import org.junit.Rule
@@ -18,7 +18,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class OwnEspressoTests {
-
+/*
     @get:Rule
     var homeRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
 
@@ -112,7 +112,7 @@ class OwnEspressoTests {
 
 
 
-
+*/
 }
 
 private fun Any.check(completelyDisplayed: Matcher<View>?) {

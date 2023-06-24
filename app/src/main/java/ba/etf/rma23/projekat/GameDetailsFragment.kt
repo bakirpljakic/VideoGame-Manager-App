@@ -3,6 +3,9 @@ package ba.etf.rma23.projekat
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -103,9 +106,11 @@ class GameDetailsFragment : Fragment() {
             runBlocking { AccountGamesRepository.removeGame(game.id) }
         }
 
-        val gameReviews: List<GameReview> = runBlocking {
-            GameReviewsRepository.getReviewsForGame(game.id)
-        }
+
+              val gameReviews: List<GameReview> = runBlocking {
+                GameReviewsRepository.getReviewsForGame(game.id)
+            }
+
 
 
            impressions = gameReviews.flatMap { item ->
@@ -137,9 +142,8 @@ class GameDetailsFragment : Fragment() {
 
             if (changedRating || !addReview.text.isNullOrEmpty()) {
                 runBlocking {
-                    val gameReview = GameReview(0, rating, review, game.id, false)
+                    val gameReview = GameReview( rating, review, game.id, false, "","")
                     AppDatabase.getInstance(requireContext()).reviewDao().insertAll(gameReview)
-
                     GameReviewsRepository.getOfflineReviews(requireContext()).size
                     addRating.rating = 0F
                     changedRating = false

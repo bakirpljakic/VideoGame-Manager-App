@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = ([GameReview::class]), version = 3)
+@Database(entities = ([GameReview::class]), version = 12)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun reviewDao(): ReviewDao
     companion object {
@@ -23,7 +23,7 @@ abstract class AppDatabase : RoomDatabase() {
             Room.databaseBuilder(
                 context.applicationContext,
                 AppDatabase::class.java,
-                "gamereview-db"
+                "gamereview"
             ) .fallbackToDestructiveMigration().build()
     }
 }

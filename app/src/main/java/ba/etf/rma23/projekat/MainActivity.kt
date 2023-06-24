@@ -59,8 +59,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-*/
+*//*
+    CoroutineScope(Job() + Dispatchers.Main).launch {
+            val db = AppDatabase.getInstance(applicationContext)
+            val review = GameReview(5, "Extra", 176032, false, "proba1", "987654")
+            db.reviewDao().insertAll(review)
 
+
+        }*/
 
         val context = applicationContext // Replace applicationContext with the appropriate application context
 /*
