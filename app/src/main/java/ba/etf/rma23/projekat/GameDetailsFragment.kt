@@ -115,11 +115,11 @@ class GameDetailsFragment : Fragment() {
 
            impressions = gameReviews.flatMap { item ->
             val ratings = if (item.rating != null)
-                listOf(UserRating("Anonymous", 0L, item.rating!!))
+                listOf(UserRating(item.userName, 0L, item.rating!!))
             else emptyList()
 
             val reviews = if (item.review != null && item.review != "null")
-                listOf(UserReview("Anonymous", 0L, item.review!!))
+                listOf(UserReview(item.userName, 0L, item.review!!))
             else emptyList()
 
             ratings + reviews

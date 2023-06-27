@@ -41,33 +41,7 @@ object GameReviewsRepository {
         }
     }
 
-    /* suspend fun sendReview(gr: GameReview): Boolean {
-         val reviews = getReviewsForGame(gr.igdb_id)
-         if(reviews.isEmpty()) return false
-         if (reviews.any { it.id == gr.id }) {
-             return false
-         }
-         saveGame(GamesRepository.getGameByID(gr.igdb_id).get(0))
-         val requestBody = JSONObject().apply {
-             put("rating", gr.rating)
-             put("review", gr.review)
-         }.toString().toRequestBody("application/json".toMediaTypeOrNull())
 
-         return withContext(Dispatchers.IO) {
-             try {
-                 ReviewApiConfig.retrofit.sendReview(
-                     getHash(),
-                     gr.igdb_id.toString(),
-                     requestBody
-                 )
-                 true
-             } catch (e: Exception) {
-                 false
-             }
-         }
-     }
-
- */
     suspend fun sendReview(context: Context, review: GameReview): Boolean {
         return try {
             var isGameInList = false
